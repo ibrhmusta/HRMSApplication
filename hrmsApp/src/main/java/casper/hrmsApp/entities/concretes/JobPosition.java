@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Data
 @NoArgsConstructor
@@ -25,4 +26,13 @@ public class JobPosition {
 
     @Column(name="title")
     private String position;
+
+    @Column(name="created_date")
+    private Date createdDate;
+
+    @Column(name="updated_date")
+    private Date updatedDate;
+
+    @Column(name="status")
+    private boolean status;
 }
