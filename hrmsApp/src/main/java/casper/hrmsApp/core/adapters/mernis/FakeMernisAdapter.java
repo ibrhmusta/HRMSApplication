@@ -3,8 +3,11 @@ package casper.hrmsApp.core.adapters.mernis;
 
 import casper.hrmsApp.core.adapters.UserRealCheckService;
 import casper.hrmsApp.core.adapters.models.MernisPerson;
+import org.springframework.stereotype.Component;
+
 //import casper.hrmsApp.mernisService.PCOKPSPublicSoap;
 
+@Component
 public class FakeMernisAdapter implements UserRealCheckService {
     //PCOKPSPublicSoap publicSoap = new PCOKPSPublicSoap();
 

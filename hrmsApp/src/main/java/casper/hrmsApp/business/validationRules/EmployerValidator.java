@@ -5,10 +5,12 @@ import casper.hrmsApp.core.utilities.results.ErrorResult;
 import casper.hrmsApp.core.utilities.results.Result;
 import casper.hrmsApp.core.utilities.results.SuccessResult;
 import casper.hrmsApp.entities.concretes.Employer;
+import org.springframework.stereotype.Component;
 
-import java.util.regex.Pattern;
 
-public class EmployerValidator extends UserValidator {
+
+@Component
+public class EmployerValidator extends UserValidator implements EmployerValidatorService{
 
     public Result employerNullCheck(Employer employer) {
         String companyName = employer.getCompanyName();

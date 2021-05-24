@@ -2,16 +2,15 @@ package casper.hrmsApp.business.concretes;
 
 import casper.hrmsApp.business.abstracts.UserService;
 import casper.hrmsApp.business.constraints.Messages;
-import casper.hrmsApp.core.utilities.results.DataResult;
-import casper.hrmsApp.core.utilities.results.Result;
-import casper.hrmsApp.core.utilities.results.SuccessDataResult;
-import casper.hrmsApp.core.utilities.results.SuccessResult;
+import casper.hrmsApp.core.utilities.results.*;
 import casper.hrmsApp.dataAccess.abstracts.UserDao;
 import casper.hrmsApp.entities.abstracts.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class UserManager<T extends User> implements UserService<T> {
     private UserDao<T> userDao;
 
@@ -29,5 +28,13 @@ public class UserManager<T extends User> implements UserService<T> {
     public Result add(T t) {
         this.userDao.save(t);
         return new SuccessResult(Messages.userAdded);
+    }
+
+
+    public Result isEmailExist(String email) {
+        if(userDao.findByEmail(email).isPresent()){
+            return new ErrorResult(Messages.emailExist);
+        }
+        return new SuccessResult();
     }
 }

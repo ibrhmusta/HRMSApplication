@@ -5,11 +5,12 @@ import casper.hrmsApp.core.utilities.results.ErrorResult;
 import casper.hrmsApp.core.utilities.results.Result;
 import casper.hrmsApp.core.utilities.results.SuccessResult;
 import casper.hrmsApp.entities.concretes.Candidate;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-
-public class CandidateValidator extends UserValidator {
+@Component
+public class CandidateValidator extends UserValidator implements CandidateValidatorService {
     public Result candidateNullCheck(Candidate candidate) {
         String firstName = candidate.getFirstName();
         String lastName = candidate.getLastName();
