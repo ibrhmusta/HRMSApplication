@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class EmployerManager extends UserManager<Employer> implements EmployerService {
     private EmployerValidatorService employerValidatorService;
 
-    public EmployerManager(UserDao<Employer> userDao, EmployerValidatorService employerValidatorService) {
+    public EmployerManager(UserDao<Employer> userDao, EmployerValidatorService employerValidatorService){
         super(userDao);
         this.employerValidatorService = employerValidatorService;
     }

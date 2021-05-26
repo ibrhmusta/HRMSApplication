@@ -17,6 +17,7 @@ public class Messages {
     public static String personInValid = "Kişi doğrulaması başarısız....";
     public static String nationalityIdentityExist = "Bu kimlik numarasız zaten mevcut";
     public static String nationalIdentityInvalid = "Kimlik numarası 11 haneli olmalı";
+
     //jobposition
     public static String jobTitleExist = "Bu iş bölümü zaten mevcut";
     public static String jobPositionAdded = "İş bölümü eklendi";
@@ -27,5 +28,9 @@ public class Messages {
     public static String activationCodeDeleted = "Aktivasyon kodu silindi.";
     public static String activationCodeUpdated = "Aktivasyon kodu güncellendi.";
     public static String activationCodeListed = "Aktivasyon kodları listelendi.";
-
+    public static String codeNotFound = "Aktivasyon kodu bulunamadı";
+    public static String activationExist = "Bu email zaten doğrulanmış";
+    public static String codeExpired = "Aktivasyon kodunun zamanı geçmiş, bir zahmet yenisini iste";
+    public static String codeNotEqual = "Aktivasyon kodu geçersiz";
+    public static String codeVerified = "Aktivasyon kod doğrulaması başarılı";
 }

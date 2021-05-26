@@ -15,6 +15,12 @@ import java.sql.Date;
 @AllArgsConstructor
 @Table(name="activation_codes")
 public class ActivationCode {
+
+    public ActivationCode(int userId, String activationCode) {
+        this.userId = userId;
+        this.activationCode = activationCode;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")

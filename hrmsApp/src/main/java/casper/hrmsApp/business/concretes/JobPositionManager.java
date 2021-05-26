@@ -5,6 +5,7 @@ import casper.hrmsApp.business.abstracts.JobPositionService;
 import casper.hrmsApp.business.constant.Messages;
 import casper.hrmsApp.core.utilities.business.BusinessEngine;
 import casper.hrmsApp.core.utilities.results.*;
+import casper.hrmsApp.core.utilities.verificationtool.CodeGenerator;
 import casper.hrmsApp.dataAccess.abstracts.JobPositionDao;
 import casper.hrmsApp.entities.concretes.JobPosition;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ public class JobPositionManager implements JobPositionService {
     public Result add(JobPosition jobPosition) {
         Result result = BusinessEngine.run(isJobPositionExist(jobPosition));
         if(result.isSuccess()){
+            jobPosition.setUid(CodeGenerator.generateUuidCode());
         this.jobPositionDao.save(jobPosition);
         return new SuccessResult(Messages.jobPositionAdded);
         }

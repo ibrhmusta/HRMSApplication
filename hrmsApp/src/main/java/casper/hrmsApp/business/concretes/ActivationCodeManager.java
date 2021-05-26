@@ -14,6 +14,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ActivationCodeManager implements ActivationCodeService {
@@ -39,5 +40,10 @@ public class ActivationCodeManager implements ActivationCodeService {
     public Result update(ActivationCode activationCode) {
         activationCodeDao.save(activationCode);
         return new SuccessResult(Messages.activationCodeUpdated);
+    }
+
+    @Override
+    public DataResult<Optional<ActivationCode>> getByUserId(int userId) {
+        return new SuccessDataResult<Optional<ActivationCode>>(activationCodeDao.findByUserId(userId));
     }
 }

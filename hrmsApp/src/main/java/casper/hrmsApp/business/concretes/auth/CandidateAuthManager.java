@@ -1,41 +1,103 @@
 package casper.hrmsApp.business.concretes.auth;
 
+import casper.hrmsApp.business.abstracts.ActivationCodeService;
 import casper.hrmsApp.business.abstracts.CandidateService;
 import casper.hrmsApp.business.abstracts.auth.CandidateAuthService;
+import casper.hrmsApp.business.constant.Messages;
 import casper.hrmsApp.business.validationRules.AuthValidatorService;
 import casper.hrmsApp.core.utilities.business.BusinessEngine;
-import casper.hrmsApp.core.utilities.results.DataResult;
-import casper.hrmsApp.core.utilities.results.ErrorDataResult;
-import casper.hrmsApp.core.utilities.results.Result;
+import casper.hrmsApp.core.utilities.email.EmailSenderService;
+import casper.hrmsApp.core.utilities.results.*;
+import casper.hrmsApp.core.utilities.verificationtool.CodeGenerator;
+import casper.hrmsApp.entities.concretes.ActivationCode;
 import casper.hrmsApp.entities.concretes.Candidate;
 import casper.hrmsApp.entities.dtos.RegisterForCandidateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
+import java.util.Optional;
+
 @Service
 public class CandidateAuthManager implements CandidateAuthService {
     private AuthValidatorService authValidatorService;
     private CandidateService candidateService;
+    private ActivationCodeService activationCodeService;
+    private EmailSenderService emailSenderService;
 
     @Autowired
-    public CandidateAuthManager(AuthValidatorService authValidatorService,CandidateService candidateService) {
+    public CandidateAuthManager(AuthValidatorService authValidatorService, CandidateService candidateService,
+                                ActivationCodeService activationCodeService, EmailSenderService emailSenderService) {
         this.authValidatorService = authValidatorService;
         this.candidateService = candidateService;
+        this.activationCodeService = activationCodeService;
+        this.emailSenderService = emailSenderService;
     }
 
     @Override
-    public Result registerForCandidate(RegisterForCandidateDto registerForCandidateDto) {
-        Result result = BusinessEngine.run(authValidatorService.isPasswordConfirmed(registerForCandidateDto.getPassword(),
-                registerForCandidateDto.getConfirmPassword()));
+    public Result register(RegisterForCandidateDto registerForCandidateDto) {
+        Result result = BusinessEngine.run(authValidatorService
+                .isPasswordConfirmed(registerForCandidateDto.getPassword(),
+                        registerForCandidateDto.getConfirmPassword()));
         if (!result.isSuccess()) {
             return result;
         }
+        DataResult<Candidate> addResult = candidateAdd(registerForCandidateDto);
+        if (!addResult.isSuccess()) {
+            return addResult;
+        }
+        String code = CodeGenerator.generateUuidCode();
+        Result codeAddResult = activationCodeAdd(addResult.getData().getId(), code);
+        if (!codeAddResult.isSuccess()) {
+            return codeAddResult;
+        }
+        emailSenderService.send("Doğrulama işin linke tıklayınız : https://dogrulama.deneme/" + code);
+        return new SuccessResult(Messages.userAdded);
+    }
+
+    @Override
+    public Result verify(int userId, String activationCode) {
+        Optional<ActivationCode> activation = activationCodeService.getByUserId(userId).getData();
+        Result result = subVerify(activation,activationCode);
+        if(!result.isSuccess()){
+            return result;
+        }
+        return new SuccessResult(Messages.codeVerified);
+    }
+
+    private DataResult<Candidate> candidateAdd(RegisterForCandidateDto registerForCandidateDto) {
         Candidate candidate = new Candidate(registerForCandidateDto.getFirstName(), registerForCandidateDto.getLastName()
                 , registerForCandidateDto.getNationalIdentity(), registerForCandidateDto.getDateOfBirth(), registerForCandidateDto.getEmail(), registerForCandidateDto.getPassword());
         Result addResult = candidateService.add(candidate);
-        if(!addResult.isSuccess()){
-            return addResult;
+        if (!addResult.isSuccess()) {
+            return new ErrorDataResult<>(null, addResult.getMessage());
         }
-        return null;
+        return new SuccessDataResult<Candidate>(candidate);
+    }
+
+    private Result activationCodeAdd(int userId, String code) {
+        ActivationCode activationCode = new ActivationCode(userId, code);
+        Result activationResult = activationCodeService.add(activationCode);
+        if (!activationResult.isSuccess()) {
+            return activationResult;
+        }
+        return new SuccessResult();
+    }
+
+    private Result subVerify(Optional<ActivationCode> activation,String activationCode){
+        if (activation.isEmpty()) {
+            return new ErrorResult(Messages.codeNotFound);
+        }
+        if (activation.get().isConfirmed()) {
+            return new ErrorResult(Messages.activationExist);
+        }
+        if (activation.get().getExprationDate().before(Date.valueOf(String.valueOf(LocalDateTime.now())))) {
+            return new ErrorResult(Messages.codeExpired);
+        }
+        if (!activation.get().getActivationCode().equals(activationCode)) {
+            return new ErrorResult(Messages.codeNotEqual);
+        }
+        return new SuccessResult();
     }
 }
