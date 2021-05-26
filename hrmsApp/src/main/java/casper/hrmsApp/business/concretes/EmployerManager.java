@@ -6,12 +6,14 @@ import casper.hrmsApp.core.utilities.business.BusinessEngine;
 import casper.hrmsApp.core.utilities.results.Result;
 import casper.hrmsApp.dataAccess.abstracts.UserDao;
 import casper.hrmsApp.entities.concretes.Employer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EmployerManager extends UserManager<Employer> implements EmployerService {
     private EmployerValidatorService employerValidatorService;
 
+    @Autowired
     public EmployerManager(UserDao<Employer> userDao, EmployerValidatorService employerValidatorService){
         super(userDao);
         this.employerValidatorService = employerValidatorService;

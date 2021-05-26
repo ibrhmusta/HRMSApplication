@@ -9,5 +9,4 @@ import casper.hrmsApp.entities.dtos.RegisterForEmployerDto;
 
 public interface EmployerAuthService {
     Result register(RegisterForEmployerDto registerForEmployerDto);
-    Result verify(int userId,String activationCode);
 }

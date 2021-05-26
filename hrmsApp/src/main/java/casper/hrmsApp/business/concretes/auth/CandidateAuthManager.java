@@ -56,15 +56,6 @@ public class CandidateAuthManager implements CandidateAuthService {
         return new SuccessResult(Messages.userAdded);
     }
 
-    @Override
-    public Result verify(int userId, String activationCode) {
-        Optional<ActivationCode> activation = activationCodeService.getByUserId(userId).getData();
-        Result result = subVerify(activation,activationCode);
-        if(!result.isSuccess()){
-            return result;
-        }
-        return new SuccessResult(Messages.codeVerified);
-    }
 
     private DataResult<Candidate> candidateAdd(RegisterForCandidateDto registerForCandidateDto) {
         Candidate candidate = new Candidate(registerForCandidateDto.getFirstName(), registerForCandidateDto.getLastName()
@@ -81,22 +72,6 @@ public class CandidateAuthManager implements CandidateAuthService {
         Result activationResult = activationCodeService.add(activationCode);
         if (!activationResult.isSuccess()) {
             return activationResult;
-        }
-        return new SuccessResult();
-    }
-
-    private Result subVerify(Optional<ActivationCode> activation,String activationCode){
-        if (activation.isEmpty()) {
-            return new ErrorResult(Messages.codeNotFound);
-        }
-        if (activation.get().isConfirmed()) {
-            return new ErrorResult(Messages.activationExist);
-        }
-        if (activation.get().getExprationDate().before(Date.valueOf(String.valueOf(LocalDateTime.now())))) {
-            return new ErrorResult(Messages.codeExpired);
-        }
-        if (!activation.get().getActivationCode().equals(activationCode)) {
-            return new ErrorResult(Messages.codeNotEqual);
         }
         return new SuccessResult();
     }
