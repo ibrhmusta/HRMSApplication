@@ -1,12 +1,11 @@
 package casper.hrmsApp.business.concretes;
 
 import casper.hrmsApp.business.abstracts.CandidateService;
-import casper.hrmsApp.business.constraints.Messages;
+import casper.hrmsApp.business.constant.Messages;
 import casper.hrmsApp.business.validationRules.CandidateValidatorService;
 import casper.hrmsApp.core.adapters.UserRealCheckService;
 import casper.hrmsApp.core.adapters.models.MernisPerson;
 import casper.hrmsApp.core.utilities.business.BusinessEngine;
-import casper.hrmsApp.core.utilities.results.DataResult;
 import casper.hrmsApp.core.utilities.results.ErrorResult;
 import casper.hrmsApp.core.utilities.results.Result;
 import casper.hrmsApp.core.utilities.results.SuccessResult;
@@ -15,8 +14,6 @@ import casper.hrmsApp.dataAccess.abstracts.UserDao;
 import casper.hrmsApp.entities.concretes.Candidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class CandidateManager extends UserManager<Candidate> implements CandidateService {
@@ -36,16 +33,13 @@ public class CandidateManager extends UserManager<Candidate> implements Candidat
 
     @Override
     public Result add(Candidate candidate) {
-        Result validateResult = candidateValidatorService.candidateNullCheck(candidate);
-        if(validateResult.isSuccess()) {
-            Result result = BusinessEngine.run(super.isEmailExist(candidate.getEmail()), isIdentityNumberExist(candidate.getNationalIdentity()),
-                    isMernisVerified(candidate));
+            Result result = BusinessEngine.run(isIdentityNumberExist(candidate.getNationalIdentity()),
+                    isMernisVerified(candidate),candidateValidatorService.candidateNullCheck(candidate),
+                    candidateValidatorService.nationalIdValid(candidate.getNationalIdentity()));
             if (result.isSuccess()) {
                 return super.add(candidate);
             }
             return result;
-        }
-        return validateResult;
     }
 
     private Result isIdentityNumberExist(String identityNumber) {
@@ -62,6 +56,6 @@ public class CandidateManager extends UserManager<Candidate> implements Candidat
         if(result){
             return new SuccessResult();
         }
-        return new ErrorResult(Messages.PersonInValid);
+        return new ErrorResult(Messages.personInValid);
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.UUID;
 
 
 @Data
@@ -20,10 +21,18 @@ import java.sql.Date;
 
 public abstract class User {
 
+    public User(String email, String password){
+        this.email = email;
+        this.password=password;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private int id;
+
+    @Column(name="uid")
+    private String uid;
 
     @Column(name="email")
     private String email;

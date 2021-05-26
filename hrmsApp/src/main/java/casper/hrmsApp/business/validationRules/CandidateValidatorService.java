@@ -5,4 +5,5 @@ import casper.hrmsApp.entities.concretes.Candidate;
 
 public interface CandidateValidatorService {
     Result candidateNullCheck(Candidate candidate);
+    Result nationalIdValid (String nationalIdentity);
 }

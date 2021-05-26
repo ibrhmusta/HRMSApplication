@@ -20,6 +20,13 @@ import javax.persistence.Table;
 @Table(name="employers")
 public class Employer extends User {
 
+    public Employer( String companyName,String webAdress,String phoneNumber,String email,String password){
+        super(email,password);
+        this.companyName=companyName;
+        this.webAddress=webAdress;
+        this.phoneNumber=phoneNumber;
+    }
+
     @Column(name="company_name")
     private String companyName;
 

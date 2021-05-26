@@ -1,7 +1,8 @@
 package casper.hrmsApp.business.concretes;
 
 import casper.hrmsApp.business.abstracts.UserService;
-import casper.hrmsApp.business.constraints.Messages;
+import casper.hrmsApp.business.constant.Messages;
+import casper.hrmsApp.core.utilities.business.BusinessEngine;
 import casper.hrmsApp.core.utilities.results.*;
 import casper.hrmsApp.dataAccess.abstracts.UserDao;
 import casper.hrmsApp.entities.abstracts.User;
@@ -26,12 +27,16 @@ public class UserManager<T extends User> implements UserService<T> {
 
     @Override
     public Result add(T t) {
+        Result result = BusinessEngine.run(isEmailExist(t.getEmail()));
+        if(result.isSuccess()){
         this.userDao.save(t);
         return new SuccessResult(Messages.userAdded);
     }
+        return result;
+}
 
 
-    public Result isEmailExist(String email) {
+    private Result isEmailExist(String email) {
         if(userDao.findByEmail(email).isPresent()){
             return new ErrorResult(Messages.emailExist);
         }

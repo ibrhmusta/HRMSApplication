@@ -1,6 +1,6 @@
 package casper.hrmsApp.business.validationRules;
 
-import casper.hrmsApp.business.constraints.Messages;
+import casper.hrmsApp.business.constant.Messages;
 import casper.hrmsApp.core.utilities.results.ErrorResult;
 import casper.hrmsApp.core.utilities.results.Result;
 import casper.hrmsApp.core.utilities.results.SuccessResult;

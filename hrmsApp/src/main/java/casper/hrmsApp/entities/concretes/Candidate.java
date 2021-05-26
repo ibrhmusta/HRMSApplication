@@ -10,7 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import java.util.Date;
+import java.sql.Date;
 
 @EqualsAndHashCode(callSuper = false)
 @Data
@@ -21,6 +21,15 @@ import java.util.Date;
 @Table(name="candidates")
 
 public class Candidate extends User {
+
+    public Candidate( String firstName, String lastName, String nationalIdentity, Date dateOfBirth, String email, String password)
+    {
+        super(email,password);
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.nationalIdentity=nationalIdentity;
+        this.dateOfBirth=dateOfBirth;
+    }
 
     @Column(name="first_name")
     private String firstName;
