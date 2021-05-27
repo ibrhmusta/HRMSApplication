@@ -52,7 +52,7 @@ public class CandidateAuthManager implements CandidateAuthService {
         if (!codeAddResult.isSuccess()) {
             return codeAddResult;
         }
-        emailSenderService.send("Doğrulama işin linke tıklayınız : https://dogrulama.deneme/" + code);
+        emailSenderService.send("Doğrulama için linke tıklayınız : http://localhost:8080/api/auth/verify?activationCode="+code+"&userId="+addResult.getData().getId());
         return new SuccessResult(Messages.userAdded);
     }
 

@@ -36,10 +36,10 @@ public class CandidateManager extends UserManager<Candidate> implements Candidat
             Result result = BusinessEngine.run(isIdentityNumberExist(candidate.getNationalIdentity()),
                     isMernisVerified(candidate),candidateValidatorService.candidateNullCheck(candidate),
                     candidateValidatorService.nationalIdValid(candidate.getNationalIdentity()));
-            if (result.isSuccess()) {
-                return super.add(candidate);
+            if (!result.isSuccess()) {
+                return result;
             }
-            return result;
+        return super.add(candidate);
     }
 
     private Result isIdentityNumberExist(String identityNumber) {
