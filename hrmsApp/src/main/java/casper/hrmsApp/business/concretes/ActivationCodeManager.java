@@ -6,6 +6,7 @@ import casper.hrmsApp.core.utilities.results.DataResult;
 import casper.hrmsApp.core.utilities.results.Result;
 import casper.hrmsApp.core.utilities.results.SuccessDataResult;
 import casper.hrmsApp.core.utilities.results.SuccessResult;
+import casper.hrmsApp.core.utilities.verificationtool.CodeGenerator;
 import casper.hrmsApp.dataAccess.abstracts.ActivationCodeDao;
 import casper.hrmsApp.entities.concretes.ActivationCode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,8 @@ public class ActivationCodeManager implements ActivationCodeService {
 
     @Override
     public Result add(ActivationCode activationCode) {
-        activationCode.setExprationDate(Date.valueOf(String.valueOf(LocalDateTime.now().plusMinutes(3))));
+        activationCode.setExprationDate(LocalDateTime.now().plusMinutes(5));
+        activationCode.setUid(CodeGenerator.generateUuidCode());
         activationCodeDao.save(activationCode);
         return new SuccessResult(Messages.activationCodeAdded);
     }

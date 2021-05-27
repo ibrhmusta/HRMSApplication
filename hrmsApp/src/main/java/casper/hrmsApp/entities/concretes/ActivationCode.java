@@ -7,7 +7,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -36,21 +36,21 @@ public class ActivationCode {
     private String activationCode;
 
     @Column(name="expration_date")
-    private Date exprationDate;
+    private LocalDateTime exprationDate;
 
     @Column(name="is_confirmed")
     private boolean isConfirmed;
 
     @Column(name="activation_date")
-    private Date activationDate;
+    private LocalDateTime activationDate;
 
-    @CreatedDate
+
     @Column(name="created_date")
-    private Date createdDate;
+    private LocalDateTime createdDate= LocalDateTime.now();
 
     @LastModifiedDate
     @Column(name="updated_date")
-    private Date updatedDate;
+    private LocalDateTime updatedDate;
 
     @Column(name="status")
     private boolean status;

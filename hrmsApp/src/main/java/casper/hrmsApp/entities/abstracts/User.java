@@ -4,12 +4,15 @@ package casper.hrmsApp.entities.abstracts;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.UUID;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 @Data
@@ -40,13 +43,13 @@ public abstract class User {
     @Column(name="password")
     private String password;
 
-    @CreatedDate
+
     @Column(name="created_date")
-    private Date createdDate;
+    private LocalDateTime createdDate= LocalDateTime.now();
 
     @LastModifiedDate
     @Column(name="updated_date")
-    private Date updatedDate;
+    private LocalDateTime updatedDate;
 
     @Column(name="status")
     private boolean status;

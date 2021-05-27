@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -28,10 +29,10 @@ public class JobPosition {
     private String title;
 
     @Column(name="created_date")
-    private Date createdDate;
+    private LocalDateTime createdDate= LocalDateTime.now();
 
     @Column(name="updated_date")
-    private Date updatedDate;
+    private LocalDateTime updatedDate;
 
     @Column(name="status")
     private boolean status;

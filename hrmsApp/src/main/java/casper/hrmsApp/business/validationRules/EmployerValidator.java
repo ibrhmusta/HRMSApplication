@@ -33,6 +33,6 @@ public class EmployerValidator extends UserValidator implements EmployerValidato
         if(domain.equals(email.split("@")[1])){
             return new SuccessResult();
         }
-        return new ErrorResult();
+        return new ErrorResult("Domain geçersiz");
     }
 }

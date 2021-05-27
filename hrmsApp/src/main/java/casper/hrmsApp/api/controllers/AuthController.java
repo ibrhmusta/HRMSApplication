@@ -18,9 +18,10 @@ public class AuthController {
     private VerifyService verifyService;
 
     @Autowired
-    public AuthController(CandidateAuthService candidateAuthService, EmployerAuthService employerAuthService) {
+    public AuthController(CandidateAuthService candidateAuthService, EmployerAuthService employerAuthService,VerifyService verifyService) {
         this.candidateAuthService = candidateAuthService;
         this.employerAuthService = employerAuthService;
+        this.verifyService =verifyService;
     }
 
     @PostMapping("/candidate/register")

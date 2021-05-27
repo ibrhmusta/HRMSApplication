@@ -7,7 +7,8 @@ import casper.hrmsApp.core.utilities.results.SuccessResult;
 import casper.hrmsApp.entities.concretes.Candidate;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
+import java.sql.Date;
+import java.time.LocalDateTime;
 
 @Component
 public class CandidateValidator extends UserValidator implements CandidateValidatorService {
