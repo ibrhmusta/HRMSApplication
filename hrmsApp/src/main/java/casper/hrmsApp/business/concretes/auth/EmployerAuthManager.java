@@ -9,6 +9,7 @@ import casper.hrmsApp.core.utilities.business.BusinessEngine;
 import casper.hrmsApp.core.utilities.email.EmailSenderService;
 import casper.hrmsApp.core.utilities.results.*;
 import casper.hrmsApp.core.utilities.verificationtool.CodeGenerator;
+import casper.hrmsApp.entities.abstracts.User;
 import casper.hrmsApp.entities.concretes.ActivationCode;
 import casper.hrmsApp.entities.concretes.Employer;
 import casper.hrmsApp.entities.dtos.RegisterForEmployerDto;
@@ -46,11 +47,11 @@ public class EmployerAuthManager implements EmployerAuthService {
             return addResult;
         }
         String code = CodeGenerator.generateUuidCode();
-        Result codeAddResult = activationCodeAdd(addResult.getData().getId(), code);
+        Result codeAddResult = activationCodeAdd(addResult.getData(), code);
         if (!codeAddResult.isSuccess()) {
             return codeAddResult;
         }
-        emailSenderService.send("Doğrulama işin linke tıklayınız : https://dogrulama.deneme/" + code);
+        emailSenderService.send("Doğrulama için linke tıklayınız : http://localhost:8080/api/auth/verify?activationCode="+code+"&uid="+addResult.getData().getUid());
         return new SuccessResult(Messages.userAdded);
     }
 
@@ -65,8 +66,10 @@ public class EmployerAuthManager implements EmployerAuthService {
         return new SuccessDataResult<Employer>(employer);
     }
 
-    private Result activationCodeAdd(int userId, String code) {
-        ActivationCode activationCode = new ActivationCode(userId, code);
+    private Result activationCodeAdd(User user, String code) {
+        ActivationCode activationCode = new ActivationCode();
+        activationCode.setActivationCode(code);
+        activationCode.setUser(user);
         Result activationResult = activationCodeService.add(activationCode);
         if (!activationResult.isSuccess()) {
             return activationResult;

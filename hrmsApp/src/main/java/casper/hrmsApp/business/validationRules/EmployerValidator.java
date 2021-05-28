@@ -5,6 +5,7 @@ import casper.hrmsApp.core.utilities.results.ErrorResult;
 import casper.hrmsApp.core.utilities.results.Result;
 import casper.hrmsApp.core.utilities.results.SuccessResult;
 import casper.hrmsApp.entities.concretes.Employer;
+import com.google.common.base.Strings;
 import org.springframework.stereotype.Component;
 
 
@@ -17,8 +18,8 @@ public class EmployerValidator extends UserValidator implements EmployerValidato
         String webAddress = employer.getWebAddress();
         String phoneNumber = employer.getPhoneNumber();
 
-        if (super.userNullCheck(employer).isSuccess() && (companyName == null || companyName.isBlank())
-                && (webAddress == null || webAddress.isBlank())&&(phoneNumber==null||phoneNumber.isBlank())) {
+        if (!super.userNullCheck(employer).isSuccess() || Strings.isNullOrEmpty(companyName)
+                || Strings.isNullOrEmpty(webAddress)||Strings.isNullOrEmpty(phoneNumber)) {
             return new ErrorResult(Messages.notNull);
         }
         return new SuccessResult();

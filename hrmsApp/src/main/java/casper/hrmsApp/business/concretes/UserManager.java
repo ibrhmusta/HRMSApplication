@@ -29,17 +29,18 @@ public class UserManager<T extends User> implements UserService<T> {
     @Override
     public Result add(T t) {
         Result result = BusinessEngine.run(isEmailExist(t.getEmail()));
-        if(result.isSuccess()){
-            t.setUid(CodeGenerator.generateUuidCode());
+        if (!result.isSuccess()) {
+            return result;
+        }
+        t.setUid(CodeGenerator.generateUuidCode());
         this.userDao.save(t);
         return new SuccessResult(Messages.userAdded);
+
     }
-        return result;
-}
 
 
     private Result isEmailExist(String email) {
-        if(userDao.findByEmail(email).isPresent()){
+        if (userDao.findByEmail(email).isPresent()) {
             return new ErrorResult(Messages.emailExist);
         }
         return new SuccessResult();

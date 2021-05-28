@@ -24,8 +24,8 @@ public class VerifyManager implements VerifyService {
         this.activationCodeService = activationCodeService;
     }
 
-    public Result verify(int userId, String activationCode) {
-        Optional<ActivationCode> activation = activationCodeService.getByUserId(userId).getData();
+    public Result verify(String uid, String activationCode) {
+        Optional<ActivationCode> activation = activationCodeService.getByUserUid(uid).getData();
         Result result = subVerify(activation,activationCode);
         if(!result.isSuccess()){
             return result;
@@ -43,7 +43,7 @@ public class VerifyManager implements VerifyService {
         if (activation.get().isConfirmed()) {
             return new ErrorResult(Messages.activationExist);
         }
-        if (activation.get().getExprationDate().isBefore(LocalDateTime.now())) {
+        if (activation.get().getExpirationDate().isBefore(LocalDateTime.now())) {
             return new ErrorResult(Messages.codeExpired);
         }
         if (!activation.get().getActivationCode().equals(activationCode)) {

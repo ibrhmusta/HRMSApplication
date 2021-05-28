@@ -10,6 +10,8 @@ import casper.hrmsApp.entities.dtos.RegisterForEmployerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -18,24 +20,24 @@ public class AuthController {
     private VerifyService verifyService;
 
     @Autowired
-    public AuthController(CandidateAuthService candidateAuthService, EmployerAuthService employerAuthService,VerifyService verifyService) {
+    public AuthController(CandidateAuthService candidateAuthService, EmployerAuthService employerAuthService, VerifyService verifyService) {
         this.candidateAuthService = candidateAuthService;
         this.employerAuthService = employerAuthService;
-        this.verifyService =verifyService;
+        this.verifyService = verifyService;
     }
 
     @PostMapping("/candidate/register")
-    public Result registerForCandidate(@RequestBody RegisterForCandidateDto registerForCandidateDto){
+    public Result registerForCandidate(@RequestBody @Valid RegisterForCandidateDto registerForCandidateDto) {
         return candidateAuthService.register(registerForCandidateDto);
     }
 
     @PostMapping("/employer/register")
-    public Result registerForEmployer(@RequestBody RegisterForEmployerDto registerForEmployerDto){
+    public Result registerForEmployer(@RequestBody @Valid RegisterForEmployerDto registerForEmployerDto) {
         return employerAuthService.register(registerForEmployerDto);
     }
 
     @GetMapping("/verify")
-    public Result verify(int userId, String activationCode){
-        return verifyService.verify(userId,activationCode);
+    public Result verify(@RequestParam("uid") String uid, @RequestParam("activationCode") String activationCode) {
+        return verifyService.verify(uid, activationCode);
     }
 }

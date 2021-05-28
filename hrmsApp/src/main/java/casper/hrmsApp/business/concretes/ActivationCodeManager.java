@@ -34,7 +34,7 @@ public class ActivationCodeManager implements ActivationCodeService {
 
     @Override
     public Result add(ActivationCode activationCode) {
-        activationCode.setExprationDate(LocalDateTime.now().plusMinutes(5));
+        activationCode.setExpirationDate(LocalDateTime.now().plusMinutes(5));
         activationCode.setUid(CodeGenerator.generateUuidCode());
         activationCodeDao.save(activationCode);
         return new SuccessResult(Messages.activationCodeAdded);
@@ -47,7 +47,7 @@ public class ActivationCodeManager implements ActivationCodeService {
     }
 
     @Override
-    public DataResult<Optional<ActivationCode>> getByUserId(int userId) {
-        return new SuccessDataResult<Optional<ActivationCode>>(activationCodeDao.findByUserId(userId));
+    public DataResult<Optional<ActivationCode>> getByUserUid(String uid) {
+        return new SuccessDataResult<Optional<ActivationCode>>(activationCodeDao.findByUserUid(uid));
     }
 }

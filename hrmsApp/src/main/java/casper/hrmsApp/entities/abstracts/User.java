@@ -43,7 +43,6 @@ public abstract class User {
     @Column(name="password")
     private String password;
 
-
     @Column(name="created_date")
     private LocalDateTime createdDate= LocalDateTime.now();
 
@@ -53,4 +52,5 @@ public abstract class User {
 
     @Column(name="status")
     private boolean status;
+
 }

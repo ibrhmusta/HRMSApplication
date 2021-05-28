@@ -1,5 +1,6 @@
 package casper.hrmsApp.entities.concretes;
 
+import casper.hrmsApp.entities.abstracts.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,18 +17,13 @@ import java.time.LocalDateTime;
 @Table(name="activation_codes")
 public class ActivationCode {
 
-    public ActivationCode(int userId, String activationCode) {
-        this.userId = userId;
-        this.activationCode = activationCode;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private int id;
 
-    @Column(name="user_id")
-    private int userId;
+    //@Column(name="user_id")
+    //private int userId;
 
     @Column(name="uid")
     private String uid;
@@ -35,15 +31,14 @@ public class ActivationCode {
     @Column(name="activation_code")
     private String activationCode;
 
-    @Column(name="expration_date")
-    private LocalDateTime exprationDate;
+    @Column(name="expiration_date")
+    private LocalDateTime expirationDate;
 
     @Column(name="is_confirmed")
     private boolean isConfirmed;
 
     @Column(name="activation_date")
     private LocalDateTime activationDate;
-
 
     @Column(name="created_date")
     private LocalDateTime createdDate= LocalDateTime.now();
@@ -54,5 +49,9 @@ public class ActivationCode {
 
     @Column(name="status")
     private boolean status;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
 }

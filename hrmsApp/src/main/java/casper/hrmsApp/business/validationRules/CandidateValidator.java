@@ -5,6 +5,7 @@ import casper.hrmsApp.core.utilities.results.ErrorResult;
 import casper.hrmsApp.core.utilities.results.Result;
 import casper.hrmsApp.core.utilities.results.SuccessResult;
 import casper.hrmsApp.entities.concretes.Candidate;
+import com.google.common.base.Strings;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
@@ -19,9 +20,9 @@ public class CandidateValidator extends UserValidator implements CandidateValida
         Date birth = candidate.getDateOfBirth();
 
 
-        if (super.userNullCheck(candidate).isSuccess() && (firstName == null || firstName.isBlank()) &&
-                (lastName == null || lastName.isBlank()) && (tc == null || tc.isBlank()) && birth == null) {
-            return new ErrorResult(Messages.notNull);
+        if (!super.userNullCheck(candidate).isSuccess() || (Strings.isNullOrEmpty(firstName)) ||
+                (Strings.isNullOrEmpty(lastName)) || (Strings.isNullOrEmpty(tc)) || birth == null) {
+            return new ErrorResult("deneme");
         }
         return new SuccessResult();
     }

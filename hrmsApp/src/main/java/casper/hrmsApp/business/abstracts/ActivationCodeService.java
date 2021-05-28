@@ -11,5 +11,5 @@ public interface ActivationCodeService {
     DataResult<List<ActivationCode>> getAll();
     Result add(ActivationCode activationCode);
     Result update(ActivationCode activationCode);
-    DataResult<Optional<ActivationCode>> getByUserId(int userId);
+    DataResult<Optional<ActivationCode>> getByUserUid(String uid);
 }
