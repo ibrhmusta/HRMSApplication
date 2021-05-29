@@ -4,14 +4,9 @@ package casper.hrmsApp.entities.abstracts;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -50,7 +45,10 @@ public abstract class User {
     @Column(name="updated_date")
     private LocalDateTime updatedDate;
 
-    @Column(name="status")
-    private boolean status;
+    @Column(name= "is_deleted")
+    private boolean isDeleted;
+
+    @Column(name="is_activated")
+    private boolean isActivated;
 
 }

@@ -43,12 +43,8 @@ public class ActivationCode {
     @Column(name="created_date")
     private LocalDateTime createdDate= LocalDateTime.now();
 
-    @LastModifiedDate
-    @Column(name="updated_date")
-    private LocalDateTime updatedDate;
-
-    @Column(name="status")
-    private boolean status;
+    @Column(name= "is_deleted")
+    private boolean isDeleted;
 
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")

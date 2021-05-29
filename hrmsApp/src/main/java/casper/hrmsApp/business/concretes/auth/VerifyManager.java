@@ -30,8 +30,8 @@ public class VerifyManager implements VerifyService {
         if(!result.isSuccess()){
             return result;
         }
-        activation.get().setActivationDate(LocalDateTime.now());
         activation.get().setConfirmed(true);
+        activation.get().setActivationDate(LocalDateTime.now());
         activationCodeService.update(activation.get());
         return new SuccessResult(Messages.codeVerified);
     }

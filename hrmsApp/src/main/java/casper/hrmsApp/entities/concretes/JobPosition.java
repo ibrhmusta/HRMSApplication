@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 @Data
@@ -34,6 +33,9 @@ public class JobPosition {
     @Column(name="updated_date")
     private LocalDateTime updatedDate;
 
-    @Column(name="status")
-    private boolean status;
+    @Column(name= "is_deleted")
+    private boolean isDeleted;
+
+    @Column(name="is_activated")
+    private boolean isActivated;
 }
