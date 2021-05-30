@@ -22,14 +22,14 @@ public class CandidateValidator extends UserValidator implements CandidateValida
 
         if (!super.userNullCheck(candidate).isSuccess() || (Strings.isNullOrEmpty(firstName)) ||
                 (Strings.isNullOrEmpty(lastName)) || (Strings.isNullOrEmpty(tc)) || birth == null) {
-            return new ErrorResult("deneme");
+            return new ErrorResult(Messages.notNull);
         }
         return new SuccessResult();
     }
 
     @Override
     public Result nationalIdValid(String nationalIdentity) {
-        if(nationalIdentity.length()==11){
+        if (nationalIdentity.length() == 11) {
             return new SuccessResult();
         }
         return new ErrorResult(Messages.nationalIdentityInvalid);

@@ -15,40 +15,40 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name="users")
+@Table(name = "users")
 
 public abstract class User {
 
-    public User(String email, String password){
+    public User(String email, String password) {
         this.email = email;
-        this.password=password;
+        this.password = password;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private int id;
 
-    @Column(name="uid")
+    @Column(name = "uid")
     private String uid;
 
-    @Column(name="email")
+    @Column(name = "email")
     private String email;
 
-    @Column(name="password")
+    @Column(name = "password")
     private String password;
 
-    @Column(name="created_date")
-    private LocalDateTime createdDate= LocalDateTime.now();
+    @Column(name = "created_date")
+    private LocalDateTime createdDate = LocalDateTime.now();
 
     @LastModifiedDate
-    @Column(name="updated_date")
+    @Column(name = "updated_date")
     private LocalDateTime updatedDate;
 
-    @Column(name= "is_deleted")
+    @Column(name = "is_deleted")
     private boolean isDeleted;
 
-    @Column(name="is_activated")
+    @Column(name = "is_activated")
     private boolean isActivated;
 
 }

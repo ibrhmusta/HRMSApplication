@@ -12,15 +12,15 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class HrmsAppApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(HrmsAppApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(HrmsAppApplication.class, args);
+    }
 
-	@Bean
-	public Docket api() {
-		return new Docket(DocumentationType.SWAGGER_2)
-				.select()
-				.apis(RequestHandlerSelectors.basePackage("casper.hrmsApp"))
-				.build();
-	}
+    @Bean
+    public Docket api() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("casper.hrmsApp"))
+                .build();
+    }
 }

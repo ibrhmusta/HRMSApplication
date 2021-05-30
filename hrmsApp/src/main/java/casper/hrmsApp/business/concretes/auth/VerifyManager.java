@@ -17,7 +17,7 @@ import java.util.Optional;
 @Service
 public class VerifyManager implements VerifyService {
 
-    private ActivationCodeService activationCodeService;
+    private final ActivationCodeService activationCodeService;
 
     @Autowired
     public VerifyManager(ActivationCodeService activationCodeService) {
@@ -26,8 +26,8 @@ public class VerifyManager implements VerifyService {
 
     public Result verify(String uid, String activationCode) {
         Optional<ActivationCode> activation = activationCodeService.getByUserUid(uid).getData();
-        Result result = subVerify(activation,activationCode);
-        if(!result.isSuccess()){
+        Result result = subVerify(activation, activationCode);
+        if (!result.isSuccess()) {
             return result;
         }
         activation.get().setConfirmed(true);
@@ -36,7 +36,7 @@ public class VerifyManager implements VerifyService {
         return new SuccessResult(Messages.codeVerified);
     }
 
-    private Result subVerify(Optional<ActivationCode> activation, String activationCode){
+    private Result subVerify(Optional<ActivationCode> activation, String activationCode) {
         if (activation.isEmpty()) {
             return new ErrorResult(Messages.codeNotFound);
         }

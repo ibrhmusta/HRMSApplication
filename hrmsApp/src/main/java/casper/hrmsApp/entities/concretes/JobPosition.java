@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -38,4 +39,8 @@ public class JobPosition {
 
     @Column(name="is_activated")
     private boolean isActivated;
+
+    //@OneToMany(mappedBy = "jobPosition")
+    //private List<JobPost> jobPosts;
+
 }

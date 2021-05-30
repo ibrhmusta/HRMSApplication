@@ -24,7 +24,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
-public class EmployerAuthManager extends UserAuthManager<RegisterForEmployerDto, Employer>implements EmployerAuthService {
+public class EmployerAuthManager extends UserAuthManager<RegisterForEmployerDto, Employer> implements EmployerAuthService {
 
     public EmployerAuthManager(AuthValidatorService authValidatorService, UserService<Employer> userService, ActivationCodeService activationCodeService, EmailSenderService emailSenderService) {
         super(authValidatorService, userService, activationCodeService, emailSenderService);

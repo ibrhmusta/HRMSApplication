@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @Service
 public class ActivationCodeManager implements ActivationCodeService {
-    private ActivationCodeDao activationCodeDao;
+    private final ActivationCodeDao activationCodeDao;
 
     @Autowired
     public ActivationCodeManager(ActivationCodeDao activationCodeDao) {
@@ -29,7 +29,7 @@ public class ActivationCodeManager implements ActivationCodeService {
 
     @Override
     public DataResult<List<ActivationCode>> getAll() {
-        return new SuccessDataResult<List<ActivationCode>>(this.activationCodeDao.findAll(),Messages.activationCodeListed);
+        return new SuccessDataResult<List<ActivationCode>>(this.activationCodeDao.findAll(), Messages.activationCodeListed);
     }
 
     @Override

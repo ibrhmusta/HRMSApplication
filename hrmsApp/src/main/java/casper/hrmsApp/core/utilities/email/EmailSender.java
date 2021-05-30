@@ -4,7 +4,7 @@ import org.aspectj.apache.bcel.classfile.Code;
 import org.springframework.stereotype.Component;
 
 @Component
-public class EmailSender implements EmailSenderService{
+public class EmailSender implements EmailSenderService {
 
     @Override
     public void send(String body) {

@@ -9,7 +9,10 @@ import java.util.Optional;
 
 public interface ActivationCodeService {
     DataResult<List<ActivationCode>> getAll();
+
     Result add(ActivationCode activationCode);
+
     Result update(ActivationCode activationCode);
+
     DataResult<Optional<ActivationCode>> getByUserUid(String uid);
 }

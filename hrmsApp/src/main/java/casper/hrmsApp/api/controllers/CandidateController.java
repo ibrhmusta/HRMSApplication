@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/candidate")
 public class CandidateController {
-    private CandidateService candidateService;
+    private final CandidateService candidateService;
 
     @Autowired
     public CandidateController(CandidateService candidateService) {
@@ -22,7 +22,7 @@ public class CandidateController {
     }
 
     @GetMapping("/getall")
-    public DataResult<List<Candidate>> getAll(){
+    public DataResult<List<Candidate>> getAll() {
         return candidateService.getAll();
     }
 }

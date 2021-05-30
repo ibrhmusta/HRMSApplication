@@ -14,36 +14,36 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="activation_codes")
+@Table(name = "activation_codes")
 public class ActivationCode {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private int id;
 
     //@Column(name="user_id")
     //private int userId;
 
-    @Column(name="uid")
+    @Column(name = "uid")
     private String uid;
 
-    @Column(name="activation_code")
+    @Column(name = "activation_code")
     private String activationCode;
 
-    @Column(name="expiration_date")
+    @Column(name = "expiration_date")
     private LocalDateTime expirationDate;
 
-    @Column(name="is_confirmed")
+    @Column(name = "is_confirmed")
     private boolean isConfirmed;
 
-    @Column(name="activation_date")
+    @Column(name = "activation_date")
     private LocalDateTime activationDate;
 
-    @Column(name="created_date")
-    private LocalDateTime createdDate= LocalDateTime.now();
+    @Column(name = "created_date")
+    private LocalDateTime createdDate = LocalDateTime.now();
 
-    @Column(name= "is_deleted")
+    @Column(name = "is_deleted")
     private boolean isDeleted;
 
     @OneToOne

@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/employer")
 public class EmployerController {
-    private EmployerService employerService;
+    private final EmployerService employerService;
 
     @Autowired
     public EmployerController(EmployerService employerService) {
@@ -23,7 +23,7 @@ public class EmployerController {
     }
 
     @GetMapping("/getall")
-    public DataResult<List<Employer>> getAll(){
+    public DataResult<List<Employer>> getAll() {
         return employerService.getAll();
     }
 }

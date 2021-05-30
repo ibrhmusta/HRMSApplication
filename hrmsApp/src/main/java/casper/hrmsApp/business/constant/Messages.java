@@ -33,4 +33,11 @@ public class Messages {
     public static String codeExpired = "Aktivasyon kodunun zamanı geçmiş, bir zahmet yenisini iste";
     public static String codeNotEqual = "Aktivasyon kodu geçersiz";
     public static String codeVerified = "Aktivasyon kod doğrulaması başarılı";
+
+    //employee
+    public static String EmployeeAdded = "Sistem çalışanı eklendi";
+
+    //jobpost
+    public static String JobPostAdded = "İş ilanı eklendi";
+    public static String JobPostUpdated = "İlan Güncellendi";
 }

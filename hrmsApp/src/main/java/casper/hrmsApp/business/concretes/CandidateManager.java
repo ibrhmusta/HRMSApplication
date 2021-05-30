@@ -18,9 +18,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class CandidateManager extends UserManager<Candidate> implements CandidateService {
 
-    private CandidateDao candidateDao;
-    private UserRealCheckService userRealCheckService;
-    private CandidateValidatorService candidateValidatorService;
+    private final CandidateDao candidateDao;
+    private final UserRealCheckService userRealCheckService;
+    private final CandidateValidatorService candidateValidatorService;
 
     @Autowired
     public CandidateManager(UserDao<Candidate> userDao, UserRealCheckService userRealCheckService,
@@ -33,12 +33,12 @@ public class CandidateManager extends UserManager<Candidate> implements Candidat
 
     @Override
     public Result add(Candidate candidate) {
-            Result result = BusinessEngine.run(isIdentityNumberExist(candidate.getNationalIdentity()),
-                    isMernisVerified(candidate),candidateValidatorService.candidateNullCheck(candidate),
-                    candidateValidatorService.nationalIdValid(candidate.getNationalIdentity()));
-            if (!result.isSuccess()) {
-                return result;
-            }
+        Result result = BusinessEngine.run(isIdentityNumberExist(candidate.getNationalIdentity()),
+                isMernisVerified(candidate), candidateValidatorService.candidateNullCheck(candidate),
+                candidateValidatorService.nationalIdValid(candidate.getNationalIdentity()));
+        if (!result.isSuccess()) {
+            return result;
+        }
         return super.add(candidate);
     }
 
@@ -53,7 +53,7 @@ public class CandidateManager extends UserManager<Candidate> implements Candidat
         MernisPerson mernisPerson = new MernisPerson(candidate.getFirstName(), candidate.getLastName(),
                 candidate.getNationalIdentity(), candidate.getDateOfBirth());
         boolean result = userRealCheckService.validate(mernisPerson);
-        if(result){
+        if (result) {
             return new SuccessResult();
         }
         return new ErrorResult(Messages.personInValid);

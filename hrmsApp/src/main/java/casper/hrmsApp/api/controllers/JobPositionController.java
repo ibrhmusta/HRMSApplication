@@ -20,12 +20,12 @@ public class JobPositionController {
     }
 
     @GetMapping("/getall")
-    public DataResult<List<JobPosition>> getAll(){
+    public DataResult<List<JobPosition>> getAll() {
         return jobPositionService.getAll();
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody JobPosition jobPosition){
+    public Result add(@RequestBody JobPosition jobPosition) {
         return jobPositionService.add(jobPosition);
     }
 }

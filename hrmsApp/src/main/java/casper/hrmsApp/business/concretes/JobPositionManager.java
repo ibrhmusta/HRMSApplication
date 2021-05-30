@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service
 public class JobPositionManager implements JobPositionService {
-    private JobPositionDao  jobPositionDao;
+    private final JobPositionDao jobPositionDao;
 
 
     @Autowired
@@ -26,23 +26,23 @@ public class JobPositionManager implements JobPositionService {
 
     @Override
     public DataResult<List<JobPosition>> getAll() {
-        return new SuccessDataResult<>(this.jobPositionDao.findAll(),Messages.jobPositionListed);
+        return new SuccessDataResult<>(this.jobPositionDao.findAll(), Messages.jobPositionListed);
     }
 
     @Override
     public Result add(JobPosition jobPosition) {
         Result result = BusinessEngine.run(isJobPositionExist(jobPosition));
-        if(result.isSuccess()){
+        if (result.isSuccess()) {
             jobPosition.setUid(CodeGenerator.generateUuidCode());
-        this.jobPositionDao.save(jobPosition);
-        return new SuccessResult(Messages.jobPositionAdded);
+            this.jobPositionDao.save(jobPosition);
+            return new SuccessResult(Messages.jobPositionAdded);
         }
         return result;
     }
 
 
-    private Result isJobPositionExist(JobPosition jobPosition){
-        if(jobPositionDao.findByTitle(jobPosition.getTitle()).isPresent()){
+    private Result isJobPositionExist(JobPosition jobPosition) {
+        if (jobPositionDao.findByTitle(jobPosition.getTitle()).isPresent()) {
             return new ErrorResult(Messages.jobTitleExist);
         }
         return new SuccessResult();
