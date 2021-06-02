@@ -33,7 +33,6 @@ public class CandidateExperience {
 
     @Column(name = "start_date")
     @NotNull
-    @NotBlank
     private LocalDate startDate;
 
     @Column(name = "leave_date")

@@ -2,13 +2,12 @@ package casper.hrmsApp.entities.dtos;
 
 import casper.hrmsApp.entities.abstracts.Dto;
 import casper.hrmsApp.entities.concretes.*;
-import ch.qos.logback.core.util.DatePatternToRegexUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Data
@@ -17,10 +16,10 @@ import java.util.List;
 public class CvDto implements Dto {
     @JsonIgnore
     private Candidate candidate;
-    private List<CandidateEducation> candidateEducations;
-    private List<CandidateExperience> candidateExperiences;
-    private List<CandidateImage> candidateImages;
-    private List<CandidateLanguage> candidateLanguages;
-    private List<CandidateLink> candidateLinks;
-    private List<CandidateSkill> candidateSkills;
+    private List<@Valid CandidateEducation> candidateEducations;
+    private List<@Valid CandidateExperience> candidateExperiences;
+    private List<@Valid CandidateImage> candidateImages;
+    private List<@Valid CandidateLanguage> candidateLanguages;
+    private List<@Valid CandidateLink> candidateLinks;
+    private List<@Valid CandidateSkill> candidateSkills;
 }

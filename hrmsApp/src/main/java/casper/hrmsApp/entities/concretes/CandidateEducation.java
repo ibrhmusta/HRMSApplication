@@ -33,7 +33,6 @@ public class CandidateEducation {
 
     @Column(name = "start_year")
     @NotNull
-    @NotBlank
     private int startYear;
 
     @Column(name = "graduation_year")

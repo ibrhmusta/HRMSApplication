@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/cv")
 public class CVController {
@@ -20,7 +22,7 @@ public class CVController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody CvDto cvDto, int candidateId) {
+    public ResponseEntity<?> add(@RequestBody @Valid CvDto cvDto, int candidateId) {
         return ResponseEntity.ok(cvService.add(cvDto,candidateId));
     }
 }

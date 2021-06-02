@@ -20,12 +20,12 @@ public class CandidateManager extends UserManager<Candidate> implements Candidat
     private final CandidateDao candidateDao;
     private final UserRealCheckService userRealCheckService;
     private final CandidateValidatorService candidateValidatorService;
-    private CandidateEducationService candidateEducationService;
-    private CandidateExperienceService candidateExperienceService;
-    private CandidateImageService candidateImageService;
-    private CandidateLanguageService candidateLanguageService;
-    private CandidateLinkService candidateLinkService;
-    private CandidateSkillService candidateSkillService;
+    private final CandidateEducationService candidateEducationService;
+    private final CandidateExperienceService candidateExperienceService;
+    private final CandidateImageService candidateImageService;
+    private final CandidateLanguageService candidateLanguageService;
+    private final CandidateLinkService candidateLinkService;
+    private final CandidateSkillService candidateSkillService;
 
 
     @Autowired

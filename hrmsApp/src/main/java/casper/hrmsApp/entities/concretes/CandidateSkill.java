@@ -21,8 +21,6 @@ public class CandidateSkill {
     private int id;
 
     @ManyToOne
-    @NotNull
-    @NotBlank
     @JsonIgnore
     @JoinColumn(name="candidate_id")
     private Candidate candidate;
