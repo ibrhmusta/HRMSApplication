@@ -21,6 +21,12 @@ public class CandidateExperienceManager implements CandidateExperienceService {
     }
 
     @Override
+    public Result addAll(List<CandidateExperience> candidateExperience) {
+        candidateExperienceDao.saveAll(candidateExperience);
+        return new SuccessResult();
+    }
+
+    @Override
     public Result add(CandidateExperience candidateExperience) {
         this.candidateExperienceDao.save(candidateExperience);
         return new SuccessResult();

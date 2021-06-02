@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.sql.Date;
 import java.util.List;
 
@@ -26,9 +27,11 @@ public class Employee extends User {
     }
 
     @Column(name = "first_name")
+    @NotBlank
     private String firstName;
 
     @Column(name = "last_name")
+    @NotBlank
     private String lastName;
 
 }

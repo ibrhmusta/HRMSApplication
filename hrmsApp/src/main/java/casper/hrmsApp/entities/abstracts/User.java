@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 
@@ -36,14 +38,18 @@ public abstract class User {
     private String uid;
 
     @Column(name = "email")
+    @NotBlank
+    @Email
     @JsonIgnore()
     private String email;
 
     @Column(name = "password")
+    @NotBlank
     @JsonIgnore()
     private String password;
 
     @Column(name = "created_date")
+    @NotBlank
     @JsonIgnore()
     private LocalDateTime createdDate = LocalDateTime.now();
 

@@ -34,6 +34,12 @@ public class CandidateImageManager implements CandidateImageService {
     }
 
     @Override
+    public Result addAll(List<CandidateImage> candidateImage) {
+        candidateImageDao.saveAll(candidateImage);
+        return new SuccessResult();
+    }
+
+    @Override
     public Result add(CandidateImage candidateImage, MultipartFile file) {
         Map<String, String> result = (Map<String, String>) imageService.save(file).getData();
         String url = result.get("url");

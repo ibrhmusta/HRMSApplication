@@ -28,6 +28,12 @@ public class CandidateSkillManager implements CandidateSkillService {
     }
 
     @Override
+    public Result addAll(List<CandidateSkill> candidateSkill) {
+        candidateSkillDao.saveAll(candidateSkill);
+        return new SuccessResult();
+    }
+
+    @Override
     public DataResult<List<CandidateSkill>> getAll() {
         return new SuccessDataResult<>(this.candidateSkillDao.findAll());
     }

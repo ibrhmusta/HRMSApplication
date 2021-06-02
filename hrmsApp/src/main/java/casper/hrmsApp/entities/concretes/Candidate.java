@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.sql.Date;
 import java.util.List;
 
@@ -32,12 +33,15 @@ public class Candidate extends User {
     }
 
     @Column(name = "first_name")
+    @NotBlank
     private String firstName;
 
     @Column(name = "last_name")
+    @NotBlank
     private String lastName;
 
     @Column(name = "national_identity")
+    @NotBlank
     @JsonIgnore()
     private String nationalIdentity;
 
@@ -45,6 +49,7 @@ public class Candidate extends User {
     private Date dateOfBirth;
 
     @Column(name = "description")
+    @NotBlank
     private String description;
 
     @OneToMany(mappedBy = "candidate")

@@ -23,7 +23,7 @@ public class UserManager<T extends User> implements UserService<T> {
 
     @Override
     public DataResult<List<T>> getAll() {
-        return new SuccessDataResult<List<T>>(this.userDao.findAll(), Messages.userListed);
+        return new SuccessDataResult<List<T>>(this.userDao.findAll(), Messages.USER_LISTED);
     }
 
     @Override

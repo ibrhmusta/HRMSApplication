@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface CandidateSkillService {
     Result add(CandidateSkill candidateSkill);
+    Result addAll(List<CandidateSkill> candidateSkill);
     DataResult<List<CandidateSkill>> getAll();
     DataResult<List<CandidateSkill>> getAllByCandidateId(int candidateId);
 

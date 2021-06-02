@@ -30,7 +30,6 @@ public class CandidateLink {
     private Candidate candidate;
 
     @ManyToOne()
-    @JsonIgnore()
     @JoinColumn(name = "link_id")
     private LinkType linkType;
 }

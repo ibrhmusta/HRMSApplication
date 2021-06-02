@@ -21,6 +21,6 @@ public class City {
     @Column(name = "name")
     private String name;
 
-    //@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    //private List<JobPost> jobPosts;
+    @OneToMany(mappedBy = "city")
+    private List<JobPost> jobPosts;
 }

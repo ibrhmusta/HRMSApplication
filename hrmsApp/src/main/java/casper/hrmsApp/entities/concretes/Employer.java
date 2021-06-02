@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.util.List;
 
@@ -27,12 +28,15 @@ public class Employer extends User {
     }
 
     @Column(name = "company_name")
+    @NotBlank
     private String companyName;
 
     @Column(name = "web_address")
+    @NotBlank
     private String webAddress;
 
     @Column(name = "phone_number")
+    @NotBlank
     private String phoneNumber;
 
     @OneToMany(mappedBy = "employer")

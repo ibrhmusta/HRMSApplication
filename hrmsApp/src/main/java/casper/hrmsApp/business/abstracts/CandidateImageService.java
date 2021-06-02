@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface CandidateImageService {
     Result add(CandidateImage candidateImage);
+    Result addAll(List<CandidateImage> candidateImage);
     Result add(CandidateImage candidateImage, MultipartFile file);
     DataResult<List<CandidateImage>> getAll();
     DataResult<List<CandidateImage>> getAllByCandidateId(int candidateId);

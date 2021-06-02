@@ -22,6 +22,12 @@ public class CandidateEducationManager implements CandidateEducationService {
     }
 
     @Override
+    public Result addAll(List<CandidateEducation> candidateEducation) {
+        candidateEducationDao.saveAll(candidateEducation);
+        return new SuccessResult();
+    }
+
+    @Override
     public Result add(CandidateEducation candidateEducation) {
         this.candidateEducationDao.save(candidateEducation);
         return new SuccessResult();
@@ -36,5 +42,4 @@ public class CandidateEducationManager implements CandidateEducationService {
     public DataResult<List<CandidateEducation>> getAllByCandidateIdOrderByGraduationYear(int candidateId) {
         return new SuccessDataResult<>(this.candidateEducationDao.getAllByCandidateIdOrderByGraduationYear(candidateId), Messages.EducationListed);
     }
-
 }

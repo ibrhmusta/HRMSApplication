@@ -3,7 +3,7 @@ package casper.hrmsApp.business.constant;
 public class Messages {
 
     //user
-    public static String userListed = "Kullanıcılar listelendi.";
+    public static final String USER_LISTED = "Kullanıcılar listelendi.";
     public static String userAdded = "Kullanıcı eklendi.";
     public static String userDeleted = "Kullanıcı silindi.";
     public static String userUpdated = "Kullanıcı güncellendi.";
@@ -41,5 +41,7 @@ public class Messages {
     public static String JobPostAdded = "İş ilanı eklendi";
     public static String JobPostUpdated = "İlan Güncellendi";
 
+    //cv
     public static String EducationListed = "Eğitim bilgisi listelendi";
+    public static String CvAdded ="Cv eklendi";
 }

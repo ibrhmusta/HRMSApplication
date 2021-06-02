@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface CandidateLanguageService {
     Result add(CandidateLanguage candidateLanguage);
+    Result addAll(List<CandidateLanguage> candidateLanguage);
     DataResult<List<CandidateLanguage>> getAll();
     DataResult<List<CandidateLanguage>> getAllByCandidateId(int candidateId);
 }

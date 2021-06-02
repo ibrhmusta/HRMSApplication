@@ -26,6 +26,12 @@ public class CandidateLinkManager implements CandidateLinkService {
     }
 
     @Override
+    public Result addAll(List<CandidateLink> candidateLink) {
+        candidateLinkDao.saveAll(candidateLink);
+        return new SuccessResult();
+    }
+
+    @Override
     public DataResult<List<CandidateLink>> getAll() {
         return new SuccessDataResult<>(this.candidateLinkDao.findAll());
     }

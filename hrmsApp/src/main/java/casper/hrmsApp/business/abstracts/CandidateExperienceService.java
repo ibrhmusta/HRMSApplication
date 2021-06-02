@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface CandidateExperienceService {
     Result add(CandidateExperience candidateExperience);
+    Result addAll(List<CandidateExperience> candidateExperience);
     DataResult<List<CandidateExperience>> getAll();
     DataResult<List<CandidateExperience>> getAllByCandidateIdOrderByLeaveDate(int candidateId);
 }
