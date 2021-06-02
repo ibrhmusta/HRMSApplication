@@ -40,7 +40,7 @@ public class JobPosition {
     @Column(name="is_activated")
     private boolean isActivated;
 
-    //@OneToMany(mappedBy = "jobPosition")
+    //@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     //private List<JobPost> jobPosts;
 
 }

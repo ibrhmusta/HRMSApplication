@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service
 public class UserManager<T extends User> implements UserService<T> {
-    private UserDao<T> userDao;
+    private final UserDao<T> userDao;
 
     @Autowired
     public UserManager(UserDao<T> userDao) {
@@ -38,9 +38,8 @@ public class UserManager<T extends User> implements UserService<T> {
 
     }
 
-
     private Result isEmailExist(String email) {
-        if (userDao.findByEmail(email).isPresent()) {
+        if(userDao.countUsersWithEmail(email)>0){
             return new ErrorResult(Messages.emailExist);
         }
         return new SuccessResult();

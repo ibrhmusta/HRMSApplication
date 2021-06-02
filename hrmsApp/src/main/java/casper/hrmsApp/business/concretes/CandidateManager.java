@@ -1,17 +1,16 @@
 package casper.hrmsApp.business.concretes;
 
-import casper.hrmsApp.business.abstracts.CandidateService;
+import casper.hrmsApp.business.abstracts.*;
 import casper.hrmsApp.business.constant.Messages;
 import casper.hrmsApp.business.validationRules.CandidateValidatorService;
 import casper.hrmsApp.core.adapters.UserRealCheckService;
 import casper.hrmsApp.core.adapters.models.MernisPerson;
 import casper.hrmsApp.core.utilities.business.BusinessEngine;
-import casper.hrmsApp.core.utilities.results.ErrorResult;
-import casper.hrmsApp.core.utilities.results.Result;
-import casper.hrmsApp.core.utilities.results.SuccessResult;
+import casper.hrmsApp.core.utilities.results.*;
 import casper.hrmsApp.dataAccess.abstracts.CandidateDao;
 import casper.hrmsApp.dataAccess.abstracts.UserDao;
 import casper.hrmsApp.entities.concretes.Candidate;
+import casper.hrmsApp.entities.dtos.CvDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,14 +20,28 @@ public class CandidateManager extends UserManager<Candidate> implements Candidat
     private final CandidateDao candidateDao;
     private final UserRealCheckService userRealCheckService;
     private final CandidateValidatorService candidateValidatorService;
+    private CandidateEducationService candidateEducationService;
+    private CandidateExperienceService candidateExperienceService;
+    private CandidateImageService candidateImageService;
+    private CandidateLanguageService candidateLanguageService;
+    private CandidateLinkService candidateLinkService;
+    private CandidateSkillService candidateSkillService;
+
 
     @Autowired
     public CandidateManager(UserDao<Candidate> userDao, UserRealCheckService userRealCheckService,
-                            CandidateValidatorService candidateValidatorService) {
+                            CandidateValidatorService candidateValidatorService, CandidateEducationService candidateEducationService,
+                            CandidateExperienceService candidateExperienceService, CandidateImageService candidateImageService, CandidateLanguageService candidateLanguageService, CandidateLinkService candidateLinkService, CandidateSkillService candidateSkillService) {
         super(userDao);
         this.candidateDao = (CandidateDao) userDao;
         this.userRealCheckService = userRealCheckService;
         this.candidateValidatorService = candidateValidatorService;
+        this.candidateEducationService = candidateEducationService;
+        this.candidateExperienceService = candidateExperienceService;
+        this.candidateImageService = candidateImageService;
+        this.candidateLanguageService = candidateLanguageService;
+        this.candidateLinkService = candidateLinkService;
+        this.candidateSkillService = candidateSkillService;
     }
 
     @Override
@@ -40,6 +53,24 @@ public class CandidateManager extends UserManager<Candidate> implements Candidat
             return result;
         }
         return super.add(candidate);
+    }
+
+    @Override
+    public DataResult<CvDto> getResumeByCandidateId(int candidateId) {
+        CvDto CvDto = new CvDto();
+        CvDto.setCandidate(this.getById(candidateId).getData());
+        CvDto.setCandidateEducations(this.candidateEducationService.getAllByCandidateIdOrderByGraduationYear(candidateId).getData());
+        CvDto.setCandidateExperiences(this.candidateExperienceService.getAllByCandidateIdOrderByLeaveDate(candidateId).getData());
+        CvDto.setCandidateImages(this.candidateImageService.getAllByCandidateId(candidateId).getData());
+        CvDto.setCandidateLanguages(this.candidateLanguageService.getAllByCandidateId(candidateId).getData());
+        CvDto.setCandidateLinks(this.candidateLinkService.getAllByCandidateId(candidateId).getData());
+        CvDto.setCandidateSkills(this.candidateSkillService.getAllByCandidateId(candidateId).getData());
+        return new SuccessDataResult<>(CvDto);
+    }
+
+    @Override
+    public DataResult<Candidate> getById(int id) {
+        return new SuccessDataResult<>(this.candidateDao.findById(id).get());
     }
 
     private Result isIdentityNumberExist(String identityNumber) {

@@ -8,7 +8,6 @@ import casper.hrmsApp.core.utilities.results.*;
 import casper.hrmsApp.core.utilities.verificationtool.CodeGenerator;
 import casper.hrmsApp.dataAccess.abstracts.JobPostDao;
 import casper.hrmsApp.entities.concretes.JobPost;
-import org.aspectj.apache.bcel.classfile.Code;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

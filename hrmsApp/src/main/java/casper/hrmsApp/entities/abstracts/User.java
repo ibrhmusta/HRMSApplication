@@ -1,6 +1,8 @@
 package casper.hrmsApp.entities.abstracts;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,25 +32,32 @@ public abstract class User {
     private int id;
 
     @Column(name = "uid")
+    @JsonIgnore()
     private String uid;
 
     @Column(name = "email")
+    @JsonIgnore()
     private String email;
 
     @Column(name = "password")
+    @JsonIgnore()
     private String password;
 
     @Column(name = "created_date")
+    @JsonIgnore()
     private LocalDateTime createdDate = LocalDateTime.now();
 
     @LastModifiedDate
     @Column(name = "updated_date")
+    @JsonIgnore()
     private LocalDateTime updatedDate;
 
-    @Column(name = "is_deleted")
-    private boolean isDeleted;
+    @Column(name = "is_deleted",columnDefinition = "boolean default false")
+    @JsonIgnore()
+    private boolean isDeleted=false;
 
-    @Column(name = "is_activated")
-    private boolean isActivated;
+    @Column(name = "is_activated",columnDefinition = "boolean default true")
+    @JsonIgnore()
+    private boolean isActivated=true;
 
 }

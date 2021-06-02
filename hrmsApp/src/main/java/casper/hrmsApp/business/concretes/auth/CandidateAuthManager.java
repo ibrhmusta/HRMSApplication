@@ -6,12 +6,12 @@ import casper.hrmsApp.business.abstracts.auth.CandidateAuthService;
 import casper.hrmsApp.business.validationRules.AuthValidatorService;
 import casper.hrmsApp.core.utilities.email.EmailSenderService;
 import casper.hrmsApp.entities.concretes.Candidate;
-import casper.hrmsApp.entities.dtos.RegisterForCandidateDto;
+import casper.hrmsApp.entities.dtos.RegisterForCandidateDtoForAuth;
 import org.springframework.stereotype.Service;
 
 
 @Service
-public class CandidateAuthManager extends UserAuthManager<RegisterForCandidateDto, Candidate> implements CandidateAuthService {
+public class CandidateAuthManager extends UserAuthManager<RegisterForCandidateDtoForAuth, Candidate> implements CandidateAuthService {
 
 
     public CandidateAuthManager(AuthValidatorService authValidatorService, UserService<Candidate> userService, ActivationCodeService activationCodeService, EmailSenderService emailSenderService) {
@@ -19,8 +19,8 @@ public class CandidateAuthManager extends UserAuthManager<RegisterForCandidateDt
     }
 
     @Override
-    public Candidate newUserInstance(RegisterForCandidateDto registerForCandidateDto) {
+    public Candidate newUserInstance(RegisterForCandidateDtoForAuth registerForCandidateDto) {
         return new Candidate(registerForCandidateDto.getFirstName(), registerForCandidateDto.getLastName()
-                , registerForCandidateDto.getNationalIdentity(), registerForCandidateDto.getDateOfBirth(), registerForCandidateDto.getEmail(), registerForCandidateDto.getPassword());
+                , registerForCandidateDto.getNationalIdentity(), registerForCandidateDto.getDateOfBirth(), registerForCandidateDto.getEmail(), registerForCandidateDto.getPassword(),registerForCandidateDto.getDescription());
     }
 }

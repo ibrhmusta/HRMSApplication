@@ -40,4 +40,6 @@ public class Messages {
     //jobpost
     public static String JobPostAdded = "İş ilanı eklendi";
     public static String JobPostUpdated = "İlan Güncellendi";
+
+    public static String EducationListed = "Eğitim bilgisi listelendi";
 }

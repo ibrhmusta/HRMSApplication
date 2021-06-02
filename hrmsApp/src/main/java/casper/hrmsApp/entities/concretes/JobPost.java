@@ -1,10 +1,10 @@
 package casper.hrmsApp.entities.concretes;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @Table(name = "job_posts")
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class JobPost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +26,7 @@ public class JobPost {
     //@Column(name = "job_position_id")
     //private int jobPositionId;
     //@Column(name = "city_id")
-    //private int cityId;é
+    //private int cityId;
     @Column(name = "description")
     private String description;
     @Column(name = "min_salary")
@@ -48,14 +47,18 @@ public class JobPost {
     private boolean isActivated;
 
     @ManyToOne
+    //@JsonIgnore
     @JoinColumn(name="employer_id")
     private Employer employer;
 
     @ManyToOne
+    //@JsonIgnore
     @JoinColumn(name="job_position_id")
     private JobPosition jobPosition;
 
     @ManyToOne
+    //@JsonIgnore
     @JoinColumn(name="city_id")
     private City city;
+
 }

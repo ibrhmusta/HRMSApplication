@@ -4,9 +4,12 @@ import casper.hrmsApp.business.abstracts.EmployeeService;
 import casper.hrmsApp.core.utilities.results.DataResult;
 import casper.hrmsApp.core.utilities.results.Result;
 import casper.hrmsApp.entities.concretes.Employee;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @RequestMapping("/api/employee")
@@ -18,11 +21,11 @@ public class EmployeeController {
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody Employee employee){
-        return employeeService.add(employee);
+    public ResponseEntity<?> add(@RequestBody Employee employee){
+        return ResponseEntity.ok(employeeService.add(employee));
     }
     @GetMapping("/getall")
-    public DataResult<List<Employee>> getAll(){
-        return employeeService.getAll();
+    public ResponseEntity<?> getAll(){
+        return ResponseEntity.ok(employeeService.getAll());
     }
 }

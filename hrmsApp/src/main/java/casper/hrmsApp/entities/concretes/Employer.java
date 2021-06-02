@@ -19,10 +19,10 @@ import java.util.List;
 @Table(name = "employers")
 public class Employer extends User {
 
-    public Employer(String companyName, String webAdress, String phoneNumber, String email, String password) {
+    public Employer(String companyName, String webAddress, String phoneNumber, String email, String password) {
         super(email, password);
         this.companyName = companyName;
-        this.webAddress = webAdress;
+        this.webAddress = webAddress;
         this.phoneNumber = phoneNumber;
     }
 
@@ -35,6 +35,6 @@ public class Employer extends User {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    //@OneToMany(mappedBy = "employer")
-    //private List<JobPost> jobPosts;
+    @OneToMany(mappedBy = "employer")
+    private List<JobPost> jobPosts;
 }

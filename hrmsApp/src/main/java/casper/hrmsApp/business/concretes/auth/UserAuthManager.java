@@ -11,16 +11,15 @@ import casper.hrmsApp.core.utilities.results.ErrorResult;
 import casper.hrmsApp.core.utilities.results.Result;
 import casper.hrmsApp.core.utilities.results.SuccessResult;
 import casper.hrmsApp.core.utilities.verificationtool.CodeGenerator;
-import casper.hrmsApp.entities.abstracts.Dto;
+import casper.hrmsApp.entities.abstracts.DtoForAuth;
 import casper.hrmsApp.entities.abstracts.User;
 import casper.hrmsApp.entities.concretes.ActivationCode;
-import casper.hrmsApp.entities.concretes.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-public abstract class UserAuthManager<TDto extends Dto, TUser extends User> implements UserAuthService<TDto, TUser> {
+public abstract class UserAuthManager<TDto extends DtoForAuth, TUser extends User> implements UserAuthService<TDto, TUser> {
 
 
     private final AuthValidatorService authValidatorService;

@@ -5,8 +5,8 @@ import casper.hrmsApp.business.abstracts.auth.CandidateAuthService;
 import casper.hrmsApp.business.abstracts.auth.EmployerAuthService;
 import casper.hrmsApp.business.abstracts.auth.VerifyService;
 import casper.hrmsApp.core.utilities.results.Result;
-import casper.hrmsApp.entities.dtos.RegisterForCandidateDto;
-import casper.hrmsApp.entities.dtos.RegisterForEmployerDto;
+import casper.hrmsApp.entities.dtos.RegisterForCandidateDtoForAuth;
+import casper.hrmsApp.entities.dtos.RegisterForEmployerDtoForAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,12 +27,12 @@ public class AuthController {
     }
 
     @PostMapping("/candidate/register")
-    public Result registerForCandidate(@RequestBody @Valid RegisterForCandidateDto registerForCandidateDto) {
+    public Result registerForCandidate(@RequestBody @Valid RegisterForCandidateDtoForAuth registerForCandidateDto) {
         return candidateAuthService.register(registerForCandidateDto);
     }
 
     @PostMapping("/employer/register")
-    public Result registerForEmployer(@RequestBody @Valid RegisterForEmployerDto registerForEmployerDto) {
+    public Result registerForEmployer(@RequestBody @Valid RegisterForEmployerDtoForAuth registerForEmployerDto) {
         return employerAuthService.register(registerForEmployerDto);
     }
 

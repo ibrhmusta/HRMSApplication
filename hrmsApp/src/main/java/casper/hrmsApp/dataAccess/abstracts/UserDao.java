@@ -2,9 +2,9 @@ package casper.hrmsApp.dataAccess.abstracts;
 
 import casper.hrmsApp.entities.abstracts.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.Optional;
+import org.springframework.data.jpa.repository.Query;
 
 public interface UserDao<T extends User> extends JpaRepository<T,Integer> {
-    Optional<T> findByEmail(String email);
+    @Query("SELECT COUNT(u.id) FROM User u WHERE u.email=:email") int
+            countUsersWithEmail(String email);
 }

@@ -1,5 +1,7 @@
 package casper.hrmsApp.entities.dtos;
 
-public class JobPostDetailsDto  {
+import casper.hrmsApp.entities.abstracts.Dto;
+
+public class JobPostDetailsDto  implements Dto {
 
 }
